@@ -13,6 +13,7 @@ public class ViewButton extends JButton {
     int drawY;
     ViewButton() throws IOException {
         this.myImage = ImageIO.read(new File("src/main/java/SpriteSheet/SpriteSheet.png"));
+        //  this.myImage2 = ImageIO.read(new File("src/main/java/SpriteSheet/SpriteSheet.png"));
         setBounds(0,0, myImage.getWidth()/4, myImage.getHeight()/4);
     }
 
@@ -20,6 +21,10 @@ public class ViewButton extends JButton {
         Animate anim = new Animate(myImage, 32, 32, 16);
         anim.start();
     }
+//    public void startAnimation2(){
+//        Animate anim = new Animate(myImage, 32, 32, 16);
+//        anim.start();
+//    }
 
     void setNewCoorditanes(int x, int y){
         this.drawX=x;
@@ -57,7 +62,7 @@ public class ViewButton extends JButton {
                 int spriteIndex = 0;
                 for (int y = 0; y > spriteSheet.getHeight() *(-1); y -= spriteSheet.getHeight()/4) {
                     for (int x = 0; x > spriteSheet.getWidth() * (-1); x -= spriteSheet.getWidth()/4) {
-//
+
                         spriteIndex++;
                         setNewCoorditanes(x, y);
                         try {
@@ -68,6 +73,48 @@ public class ViewButton extends JButton {
                     }
                 }
             }
+
+        public int[][] getCoordinates() {
+            return coordinates;
+        }
+
+
+    }
+    public class Animate2 extends Thread{
+        private final int spriteWidth;
+        private final int spriteHeight;
+        private final int numSprites;
+        private final int[][] coordinates;
+        private final BufferedImage spriteSheet;
+
+
+        public Animate2(BufferedImage spriteSheet, int spriteWidth, int spriteHeight, int numSprites) {
+            this.spriteWidth = spriteWidth;
+            this.spriteHeight = spriteHeight;
+            this.numSprites = numSprites;
+            this.coordinates = new int[numSprites][2];
+            this.spriteSheet = spriteSheet;
+        }
+
+        @Override
+        public void run() {
+            System.out.println(spriteSheet.getHeight());
+
+
+            int spriteIndex = 0;
+            for (int y = 0; y > spriteSheet.getHeight() *(-2); y -= spriteSheet.getHeight()/3) {
+                for (int x = 0; x > spriteSheet.getWidth() * (-2); x -= spriteSheet.getWidth()/3) {
+
+                    spriteIndex++;
+                    setNewCoorditanes(x, y);
+                    try {
+                        sleep(1000/7);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
 
         public int[][] getCoordinates() {
             return coordinates;

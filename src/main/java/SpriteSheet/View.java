@@ -16,7 +16,6 @@ class View extends JFrame {
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         button = new ViewButton();
-       // button.setBounds(controller.getModel().getWidth(), controller.getModel().getHeight(), 100, 50);
         button.addKeyListener(controller);
 
         setLayout(null);
